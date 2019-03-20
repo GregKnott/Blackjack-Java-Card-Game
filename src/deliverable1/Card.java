@@ -10,6 +10,7 @@ package deliverable1;
  * enough to be instantiated for any Card game. Students wishing to add to the code 
  * should remember to add themselves as a modifier.
  * @author dancye, 2018
+ * @modifier Greg Knott
  */
 public abstract class Card 
 {
@@ -19,7 +20,30 @@ public abstract class Card
      * Students should implement this method for their specific children classes 
      */
     public enum Suit {CLUBS, SPADES, DIAMONDS, HEARTS};
-        public enum Value {ACE_ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, JACK, QUEEN, KING, ACE_ELEVEN}; //Jack, Queen, King worth 10, ace is worth 1 or 11
+        public enum Value {
+            ACE (1), 
+            TWO (2), 
+            THREE (3), 
+            FOUR (4), 
+            FIVE (5), 
+            SIX (6), 
+            SEVEN (7), 
+            EIGHT (8), 
+            NINE (9), 
+            JACK (10), 
+            QUEEN (10), 
+            KING (10);
+
+            private final int intValue;
+
+            public double getIntValue() { return intValue; }
+
+            private Value(int val) {
+                intValue = val;
+            }
+        }
+
+         //Jack, Queen, King worth 10, ace is worth 1 or 11
         private final Suit suit;
         private final Value value;
         
@@ -28,6 +52,7 @@ public abstract class Card
            suit = givenSuit;
            value = givenValue;
         }
+        
 	public Value getValue() 
         {
 		return this.value;
@@ -36,7 +61,13 @@ public abstract class Card
 	public Suit getSuit() 
         {
 		return this.suit;
-        } 
+        }       
+        
+        public int randomSuit()
+        {
+            return (int) (Math.random() * Value.values().length);
+        }
+        
     @Override
     public abstract String toString();
     
